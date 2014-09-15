@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Contacts</string>
+    <string name="list_name">Contact List</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="Btn_Search_Text">Search</string>
+    <string name="Btn_Reset_Text">Reset</string>
+    <string name="title_activity_insert">InsertActivity</string>
+    <string name="ExampleName">Example Name</string>
+    <string name="ExamplePhone">Example Phone</string>
+    <string name="NoImage">No Image</string>
+
+</resources>

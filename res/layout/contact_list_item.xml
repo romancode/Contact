@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dip" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"        
+        android:layout_marginRight="2dip"
+        android:contentDescription="@string/NoImage"
+        android:src="@drawable/ic_launcher" 
+        android:background="#ffbf78"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"                
+        android:orientation="vertical"        
+        android:background="#55bada"
+        android:padding="2dip">
+
+        <TextView
+            android:id="@+id/txt_item_name"
+            android:layout_width="fill_parent"
+            android:layout_height="26dip"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="@string/ExampleName"
+            android:textSize="16sp" 
+            android:textColor="#FFFFFF"/>
+
+        <TextView
+            android:id="@+id/txt_item_phone"
+            android:layout_width="fill_parent"
+            android:layout_height="26dip"
+            android:layout_weight="1"
+            android:singleLine="true"
+            android:text="@string/ExamplePhone"
+            android:textSize="12sp" 
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+</LinearLayout>
