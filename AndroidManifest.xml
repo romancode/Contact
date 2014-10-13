@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.contact.MainActivity"
+            android:name="com.contact.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +23,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.contact.ContactListActivity"
+            android:name="com.contact.activity.ContactListActivity"
             android:label="@string/list_name" 
             android:windowSoftInputMode="stateHidden">
         </activity>
         <activity
-            android:name="com.example.contact.InsertActivity"
+            android:name="com.contact.activity.InsertActivity"
             android:label="@string/title_activity_insert" >
         </activity>
     </application>
