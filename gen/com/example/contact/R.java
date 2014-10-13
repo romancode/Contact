@@ -31,7 +31,7 @@ public final class R {
         public static final int btnDailogCancel=0x7f080011;
         public static final int btnInsert=0x7f080009;
         public static final int btnReset=0x7f080008;
-        public static final int btnSMS=0x7f080010;
+        public static final int btnReviews=0x7f080010;
         public static final int btnSave=0x7f080004;
         public static final int btnSearch=0x7f080006;
         public static final int icon=0x7f080014;

@@ -83,17 +83,17 @@
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/btnSMS"
+            android:id="@+id/btnReviews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SMS" 
+            android:text="Reviews" 
             android:layout_weight="1"/>
 
         <Button
             android:id="@+id/btnDailogCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Close" 
+            android:text="Map" 
             android:layout_weight="1"/>
     </LinearLayout>
 
