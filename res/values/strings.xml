@@ -11,5 +11,12 @@
     <string name="ExampleName">Example Name</string>
     <string name="ExamplePhone">Example Phone</string>
     <string name="NoImage">No Image</string>
+    <string name="title_activity_sub_category_list">SubCategoryListActivity</string>
+    <string name="action_search">Search</string>
+    <string name="action_location_found">Location</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_help">Help</string>
+    <string name="action_check_updates">Check for Updates</string>
+    <string name="title_activity_address_details">AddressDetailsActivity</string>
 
 </resources>

@@ -21,11 +21,11 @@ public class DBCategoryHandler extends SQLiteAssetHelper {
 		private static final String DATABASE_NAME = "contactsManager.sqlite";
 
 		// Contacts table name
-		private static final String TABLE_CATEGORY = "category";  
+		private static final String TABLE_CATEGORY = "Category";  
 		// Contacts Table Columns names
-		private static final String KEY_ID = "id";
-		private static final String KEY_CAT_NAME = "name";
-		private static final String KEY_CAT_DESC = "phone_number";
+		private static final String KEY_ID = "Id";
+		private static final String KEY_CAT_NAME = "Name";
+		private static final String KEY_CAT_IMAGE = "Image";
 		
 
 	public DBCategoryHandler(Context context) {
@@ -37,8 +37,8 @@ public class DBCategoryHandler extends SQLiteAssetHelper {
 		
 		ContentValues values=new ContentValues();
 		values.put(KEY_CAT_NAME, category.getName());
-		values.put(KEY_CAT_DESC, category.getDescription());
-		
+		values.put(KEY_CAT_IMAGE, category.getImage());
+				
 		db.insert(TABLE_CATEGORY, null, values);
 		db.close();
 	}
@@ -52,12 +52,10 @@ public class DBCategoryHandler extends SQLiteAssetHelper {
 		
 		if(cursor.moveToFirst()){
 			do{
-
 				Category cat=new Category();
 				cat.setId(Integer.parseInt(cursor.getString(0)));
 				cat.setName(cursor.getString(1));
-				cat.setDescription(cursor.getString(2));
-				
+				cat.setImage(cursor.getString(2));				
 				categoryList.add(cat);
 				
 			}while(cursor.moveToNext());
@@ -65,6 +63,24 @@ public class DBCategoryHandler extends SQLiteAssetHelper {
 		
 		return categoryList;
 	}
+	
+	public List<String> getAllCategoryName() {
+		SQLiteDatabase db=this.getReadableDatabase();
+		List<String> categoryList=new ArrayList<String>();
+		
+		String selectQuery="Select * from "+ TABLE_CATEGORY;
+		Cursor cursor=db.rawQuery(selectQuery, null);
+		
+		if(cursor.moveToFirst()){
+			do{							
+				categoryList.add(cursor.getString(1));
+				
+			}while(cursor.moveToNext());
+		}
+		
+		return categoryList;
+	}
+	
 	
 
 }

@@ -3,25 +3,25 @@
     android:id="@+id/layout_popup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="#ffbf78">
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-        
+        android:orientation="horizontal" 
+        >
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" 
+            android:layout_height="match_parent"
             android:background="#2a57fc"
-            android:padding="5dip">
+            android:padding="5dip" >
 
             <ImageView
                 android:id="@+id/icon_dialog_contact"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:layout_marginRight="2dip"                
+                android:layout_marginRight="2dip"
                 android:contentDescription="This is image"
                 android:src="@drawable/ic_launcher" />
         </LinearLayout>
@@ -44,12 +44,12 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/txt_dialog_phone"
+                android:id="@+id/txt_details_address"
                 android:layout_width="fill_parent"
                 android:layout_height="26dip"
                 android:layout_weight="1"
                 android:singleLine="true"
-                android:text="This is phone no"
+                android:text="This is address"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -65,36 +65,35 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:singleLine="true"
-            android:text="This is description"
+            android:text="This is Phone No"
             android:textSize="12sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dip" 
-        >
+        android:padding="10dip" >
 
         <Button
             android:id="@+id/btnCall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Call" 
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Call" />
 
         <Button
             android:id="@+id/btnReviews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Reviews" 
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Reviews" />
 
         <Button
             android:id="@+id/btnDailogCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Map" 
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="Map" />
     </LinearLayout>
 
 </LinearLayout>

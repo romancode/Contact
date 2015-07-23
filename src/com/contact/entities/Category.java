@@ -3,22 +3,23 @@ package com.contact.entities;
 public class Category {
 	int _id;
 	String _name;
-	String _description;
+	String _image;
+
+
 	//constructor
-	public Category(){
-		
+	public Category(){		
 	}
 
 	//constructor
-	public Category(int id, String name, String desc){
+	public Category(int id, String name, String image){
 		this._id=id;
 		this._name=name;
-		this._description=desc;
+		this._image=image;
 	}
 	//constructor
-	public Category(String name, String desc){		
+	public Category(String name, String image){		
 		this._name=name;
-		this._description=desc;
+		this._image=image;
 	}
 	//getting id
 	public int getId(){
@@ -35,13 +36,12 @@ public class Category {
 	//setting category name
 	public void setName(String name){
 		this._name=name;
+	}	
+	public String getImage(){
+		return this._image;
 	}
-	//getting description
-	public String getDescription(){
-		return this._description;
+	public void setImage(String image){
+		this._image=image;
 	}
-	//setting description
-	public void setDescription(String desc){
-		this._description=desc;
-	}
+	
 }

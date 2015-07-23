@@ -22,11 +22,11 @@ public class DBContactHandler extends SQLiteAssetHelper{
 	private static final String DATABASE_NAME = "contactsManager.sqlite";
 
 	// Contacts table name
-	private static final String TABLE_CONTACTS = "contacts";  
+	private static final String TABLE_CONTACTS = "address";  
 	// Contacts Table Columns names
 	private static final String KEY_ID = "id";
 	private static final String KEY_NAME = "name";
-	private static final String KEY_PH_NO = "phone_number";
+	private static final String KEY_PH_NO = "contact";
 	private static final String KEY_CAT_ID = "category_id";
 
 
@@ -48,38 +48,33 @@ public class DBContactHandler extends SQLiteAssetHelper{
 
 	// Getting single contact
 	public Contact getContact(int id) {
-		SQLiteDatabase db=this.getReadableDatabase();
-		Cursor cursor=db.query(TABLE_CONTACTS, new String[]{KEY_ID,KEY_NAME,KEY_PH_NO,KEY_CAT_ID}, KEY_ID+"=?", new String[]{String.valueOf(id)}, null, null, null);
 
-		if(cursor!=null)
+		Contact contact=null;
+		SQLiteDatabase db=this.getReadableDatabase();
+		
+		String selectQuery="Select * from "+ TABLE_CONTACTS +" where "+ KEY_ID+"=" +id;
+		Cursor cursor=db.rawQuery(selectQuery, null);
+
+		if(cursor!=null){
 			cursor.moveToFirst();
 
-		Contact contact=new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1),cursor.getString(2),Integer.parseInt(cursor.getString(3)));
+			contact=new Contact();
+			contact.setID(Integer.parseInt(cursor.getString(0)));
+			contact.setName(cursor.getString(1));
+			contact.setPhoneNumber(cursor.getString(2));
+			contact.setServices(cursor.getString(3));
+			contact.setWeekDays(cursor.getString(4));
+			contact.setAddress(cursor.getString(5));
+			contact.setEmail(cursor.getString(6));
+			contact.setLatitude(cursor.getString(7));
+			contact.setLongitude(cursor.getString(8));
+			contact.setWorkingHour(cursor.getString(9));
+			contact.setCategoryId(Integer.parseInt(cursor.getString(10)));
+		}
 
 		return contact;
 	}
-	// Getting All Contacts
-	public List<Contact> getAllContacts() {
-		SQLiteDatabase db=this.getReadableDatabase();
-		List<Contact> contactList=new ArrayList<Contact>();
-		String selectQuery="Select * from "+ TABLE_CONTACTS;
-		Cursor cursor=db.rawQuery(selectQuery, null);
 
-		if(cursor.moveToFirst()){
-			do{
-
-				Contact contact=new Contact();
-				contact.setID(Integer.parseInt(cursor.getString(0)));
-				contact.setName(cursor.getString(1));
-				contact.setPhoneNumber(cursor.getString(2));
-				contact.setCategoryId(Integer.parseInt(cursor.getString(3)));
-				contactList.add(contact);
-
-			}while(cursor.moveToNext());
-		}
-
-		return contactList;
-	}
 
 	// Getting contacts Count
 	public int getContactsCount() {
@@ -104,23 +99,15 @@ public class DBContactHandler extends SQLiteAssetHelper{
 		db.delete(TABLE_CONTACTS, KEY_ID + " = ?",new String[] { String.valueOf(contact.getID()) });
 		db.close();
 	}
-	public Contact getContact(String keyword) {
-		SQLiteDatabase db=this.getReadableDatabase();
-		Cursor cursor=db.query(TABLE_CONTACTS, new String[]{KEY_ID,KEY_NAME,KEY_PH_NO,KEY_CAT_ID}, KEY_NAME+"=?", new String[]{keyword}, null, null, null);
 
-		if(cursor!=null)
-			cursor.moveToFirst();
 
-		Contact contact=new Contact(Integer.parseInt(cursor.getString(0)), cursor.getString(1),cursor.getString(2),Integer.parseInt(cursor.getString(3)));
 
-		return contact;
-	}
-
-	// Getting All Contacts by name
-	public List<Contact> getAllContactsByName(String keyword) {
+	// Getting All Contacts by Category
+	public List<Contact> getAllContactsByCategory(String category) {
 		SQLiteDatabase db=this.getReadableDatabase();
 		List<Contact> contactList=new ArrayList<Contact>();
-		String selectQuery="Select * from "+ TABLE_CONTACTS + " Where "+ KEY_NAME+" LIKE '" + keyword +"%'";
+		
+		String selectQuery="Select * from "+ TABLE_CONTACTS +" where "+ KEY_CAT_ID+"=" +category;
 		Cursor cursor=db.rawQuery(selectQuery, null);
 
 		if(cursor.moveToFirst()){
@@ -130,7 +117,14 @@ public class DBContactHandler extends SQLiteAssetHelper{
 				contact.setID(Integer.parseInt(cursor.getString(0)));
 				contact.setName(cursor.getString(1));
 				contact.setPhoneNumber(cursor.getString(2));
-				contact.setCategoryId(Integer.parseInt(cursor.getString(3)));
+				contact.setServices(cursor.getString(3));
+				contact.setWeekDays(cursor.getString(4));
+				contact.setAddress(cursor.getString(5));
+				contact.setEmail(cursor.getString(6));
+				contact.setLatitude(cursor.getString(7));
+				contact.setLongitude(cursor.getString(8));
+				contact.setWorkingHour(cursor.getString(9));
+				contact.setCategoryId(Integer.parseInt(cursor.getString(10)));
 				contactList.add(contact);
 
 			}while(cursor.moveToNext());

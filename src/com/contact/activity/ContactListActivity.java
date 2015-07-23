@@ -5,19 +5,22 @@ import java.util.List;
 import com.contact.dbhelper.DBContactHandler;
 import com.contact.entities.Contact;
 
+import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
+
 
 
 public class ContactListActivity extends Activity{
@@ -39,25 +42,40 @@ public class ContactListActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact_list);
 
+		ActionBar actionBar = getActionBar();
+
+		// Enabling Up / Back navigation
+		//actionBar.setDisplayHomeAsUpEnabled(true);
+
 		lvContacts=(ListView)findViewById(R.id.lvserchlist);
 		txtFilterSearch=(EditText)findViewById(R.id.txtFilterSearch);
 
 		Bundle extras = new Bundle();
-		String newString;
+		String newString, titleString;
 		if (savedInstanceState == null) {
 			extras = getIntent().getExtras();
 			if(extras == null) {
 				newString= null;
+				titleString=null;
 			} else {
-				newString= extras.getString("KeyWord");
+				newString= extras.getString("SubCategoryId");
+				titleString=extras.getString("Name");						
 			}
 		} else {
-			newString= (String) savedInstanceState.getSerializable("KeyWord");
+			newString= (String) savedInstanceState.getSerializable("SubCategoryId");
+			titleString= (String) savedInstanceState.getSerializable("Name");
 		}
 
+		this.setTitle(titleString);
+
+		this.LoadData(newString);
+	}
+
+
+	private void LoadData(String newString){
 		// data source
 		DBContactHandler db= new DBContactHandler(this);
-		contacts =db.getAllContactsByName(newString);
+		contacts =db.getAllContactsByCategory(newString);
 		if(contacts!=null && contacts.size()>0)
 		{
 			// adapter		                
@@ -67,8 +85,31 @@ public class ContactListActivity extends Activity{
 		lvContacts.setOnItemClickListener(onItemClickListener);
 		lvContacts.setTextFilterEnabled(true);
 
-		if(adapter.getCount()>0)
+		if(adapter!=null && adapter.getCount()>0)
 			txtFilterSearch.addTextChangedListener(textWatcher) ;
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_contact_list,menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		// Take appropriate action for each action item click
+		switch (item.getItemId()) {		
+		case R.id.action_scat_refresh:
+			// refresh
+			Toast.makeText(getApplicationContext(), "Under construction!!", Toast.LENGTH_LONG).show();
+			return true;
+		case android.R.id.home: 
+			//NavUtils.navigateUpFromSameTask(this);			
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 	TextWatcher textWatcher=new TextWatcher(){
@@ -99,37 +140,15 @@ public class ContactListActivity extends Activity{
 	};
 	OnItemClickListener onItemClickListener=  new OnItemClickListener() {
 
-		Dialog detailsDialog;
-		Button btnDialogCancel;
-
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View view, int position,
-				long item) {
+		public void onItemClick(AdapterView<?> parent, View view, int position,long id) {			
 
 			Contact con=contacts.get(position);
 
-			detailsDialog=new Dialog(ContactListActivity.this);
-			detailsDialog.setContentView(R.layout.contact_details_dialog);
-			detailsDialog.setTitle(con.getName());
-
-			TextView txtDialogName=(TextView)detailsDialog.findViewById(R.id.txt_dialog_name);
-			txtDialogName.setText(con.getName());
-
-			TextView txtDialogPhone=(TextView)detailsDialog.findViewById(R.id.txt_dialog_phone);
-			txtDialogPhone.setText(con.getPhoneNumber());
-
-			detailsDialog.show();
-
-			btnDialogCancel=(Button)detailsDialog.findViewById(R.id.btnDailogCancel);
-			btnDialogCancel.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					detailsDialog.dismiss();
-
-				}
-			});
-		}
+			Intent intent=new Intent(getBaseContext(),AddressDetailsActivity.class);
+			intent.putExtra("AddressId",String.valueOf(con.getID()));			
+			startActivity(intent);								
+		}	
 	};
 
 }
